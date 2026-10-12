@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
 
+from routers.farmers import router as farmers_router
+
+
 app = FastAPI(title="FarmerConnect API")
 
 
@@ -14,6 +17,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# PostgreSQL farmers API
+app.include_router(farmers_router)
 
 
 class Procurement(BaseModel):
